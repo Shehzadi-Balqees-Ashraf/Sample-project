@@ -1,0 +1,223 @@
+/* #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+} */
+
+
+/* 
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+} */
+
+
+
+a{
+  text-decoration: none;
+}
+header{
+  display: flex;
+  justify-content: space-between;
+}
+
+#header-ul{
+  width: 40%;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.card-form-main{
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+#card-div{
+  height: 300px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgb(104, 99, 99);
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px; 
+}
+
+.form-div{
+  height: 350px;
+  width: 450px;
+  border: 1px solid rgb(131, 117, 117);
+  text-align: left;
+  padding: 10px;
+}
+
+
+#card-div img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 5px 5px 5px;
+}
+
+#card-div h2{
+  font-size: 20px;
+  text-shadow: 2px 2px 3px;
+}
+
+#card-div p{
+  text-align: center;
+  color: rgb(58, 59, 59);
+  font-size: 14px;
+}
+
+.counter-container{
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.count-display{
+  font-size: 10em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.counter-button{
+  width: 110px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  box-shadow: 5px 5px 5px;
+  margin: 0px 5px;
+  background-color: rgb(139, 180, 204);
+  border: none;
+  color: aliceblue;
+  
+}
+
+.counter-button:hover{
+  background-color: rgb(117, 197, 221);
+}
+
+.color-picker-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.color-picker-container h1{
+  font-size: 3rem;
+  margin: 50px;
+}
+
+.color-display{
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid rgb(141, 136, 136);
+  border-radius: 20px;
+  margin-bottom: 25px;
+  transition: 0.5s ease;
+}
+
+.color-picker-container p{
+  font-size: 2rem;
+  color: rgb(109, 116, 122);
+  text-align: center;
+}
+
+.color-picker-container label{
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.color-picker-container input[type="color"]{
+  width: 70px;
+  height: 50px;
+  padding: 3px;
+  border: 3px solid rgb(173, 170, 170);
+  border-radius: 10px;
+}
+
+.del-button{
+  margin-left: 4px;
+  border: none;
+  background-color: transparent;
+}
+
+.del-button svg{
+  height: 15px;
+  width: 20px;
+}
+
+.digital-clock-container{
+  width: 100wh;
+  height: 100vh;
+  background-image: url(assets/photorealistic-rainbow-with-countryside-nature-landscape.avif);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer-display{
+  font-size: 6rem;
+  color: white;
+  font-family: monospace;
+  font-weight: bold;
+  text-shadow: 3px 3px 5px grey;
+  backdrop-filter: blur(5px);
+  padding: 10px 10px;
+}
+
