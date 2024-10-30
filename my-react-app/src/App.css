@@ -73,6 +73,7 @@ header{
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin-top: 50px;
 
 }
 
@@ -118,6 +119,13 @@ header{
 .counter-container{
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
+  margin-top: 100px;
+  border: 4px double rgba(45, 34, 34, 0.77);
+}
+
+.counter-heading-container h1{
+  font-size: 3em;
+ /* border: 3px solid black; */
 }
 
 .count-display{
@@ -133,7 +141,7 @@ header{
   font-size: 1.2em;
   font-weight: bold;
   box-shadow: 5px 5px 5px;
-  margin: 0px 5px;
+  margin: 5px 5px;
   background-color: rgb(139, 180, 204);
   border: none;
   color: aliceblue;
@@ -148,11 +156,15 @@ header{
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 50px;
 }
 
 .color-picker-container h1{
   font-size: 3rem;
   margin: 50px;
+  background-color: aquamarine;
+  border-radius: 50px;
+  padding: 20px;
 }
 
 .color-display{
@@ -205,13 +217,16 @@ header{
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  background-color: blue;
+  /* background-color: blue; */
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 50px;
 }
 
 .timer-display{
+  width: 100vw;
+  text-align: center;
   font-size: 6rem;
   color: white;
   font-family: monospace;
@@ -221,3 +236,121 @@ header{
   padding: 10px 10px;
 }
 
+.dice-image img{
+  width: 50px;
+  height: 50px;
+  margin-left: 20px;
+}
+
+.to-do-ands-dice-roller-container-main{
+  height: 400px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: antiquewhite;
+}
+
+.dice-roller-heading{
+  font-size: 25px
+}
+
+.dice-result{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.stopwatch-and-counter-main-container{
+  display: flex;
+  justify-content: space-around;
+  background-color: rgb(237, 245, 245);
+}
+
+.stopwatch-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+  /* background-color: aqua; */
+}
+
+.stopwatch-h1{
+  /* background-color: cadetblue; */
+  font-size: 3rem;
+  /* border: 4px solid black; */
+  border-radius: 50px;
+  padding: 20px;
+  background-color: rgb(198, 239, 84);
+}
+
+.stopwatch-timer-container{
+  height: 300px;
+  width: 320px;
+  text-align: center;
+  border: 4px double rgba(45, 34, 34, 0.77);
+  border-radius: 5px;
+  /* background-color: bisque; */
+}
+
+.stopwatch-h3{
+  font-size: 60px;
+  font-weight: bold;
+  font-family: monospace;
+  color: rgb(37, 35, 35);
+  text-shadow: 2px 2px 2px rgb(51, 46, 46);
+}
+
+.stopwatch-button-container{
+  display: flex;
+  justify-content: center;
+  
+}
+.stopwatch-button-container button{
+  /* max-width: 300px; */
+  font-size: 1.7rem;
+  font-weight: bold;
+  width: 90px;
+  color: white;
+  margin: 5px;
+  padding: 3px 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.6s ease;
+}
+
+.stopwatch-start-btn button{
+  background-color: rgba(12, 242, 12, 0.842);
+}
+
+.stopwatch-start-btn button:hover{
+  background-color: rgba(9, 193, 9, 0.857);
+}
+
+.stopwatch-start-btn button:active{
+  font-size: 1.5rem;
+}
+
+.stopwatch-stop-btn button{
+  background-color: rgba(231, 14, 14, 0.778);
+}
+
+.stopwatch-stop-btn button:hover{
+  background-color: rgba(252, 1, 1, 0.859);
+}
+
+.stopwatch-stop-btn button:active{
+  font-size: 1.5rem;
+}
+
+.stopwatch-reset-btn button{
+  background-color: rgb(11, 179, 251);
+}
+
+.stopwatch-reset-btn button:hover{
+  background-color: rgba(1, 132, 188, 0.844);
+}
+
+.stopwatch-reset-btn button:active{
+  font-size: 1.5rem;
+}

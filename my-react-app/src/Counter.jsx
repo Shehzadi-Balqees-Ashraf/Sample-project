@@ -20,11 +20,14 @@ function Counter(){
     return(
         <>
         <div className='counter-container'>
-            <p className='count-display'>{count}</p>
-                <button className='incr-button counter-button' onClick={handleDecrement}>Decrement</button>
-                <button className='decr-button counter-button' onClick={handleIncrement}>Increment</button>
-                <button className='reset-button counter-button' onClick={handleReset}>Reset</button>
+            <div className='counter-heading-container'>
+                <h1 className='counter-heading'>Counter</h1>
             </div>
+            <p className='count-display'>{count}</p>
+            <button className='incr-button counter-button' onClick={handleDecrement}>Decrement</button>
+            <button className='decr-button counter-button' onClick={handleIncrement}>Increment</button>
+            <button className='reset-button counter-button' onClick={handleReset}>Reset</button>
+        </div>
             
         </>
     );
