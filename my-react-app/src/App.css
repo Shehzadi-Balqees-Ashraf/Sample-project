@@ -201,13 +201,32 @@ header{
 
 .del-button{
   margin-left: 4px;
+  margin-right: 4px;
   border: none;
-  background-color: transparent;
+  border-radius: 50px;
+  /* background-color: transparent; */
 }
 
 .del-button svg{
   height: 15px;
   width: 20px;
+}
+
+.del-button:hover{
+  background-color: darkgray;
+}
+
+.edit-button{
+  border: none;
+  border-radius: 50px;
+}
+.edit-button svg{
+  height: 20px;
+  width: 20px;
+}
+
+.edit-button:hover{
+  background-color: darkgray;
 }
 
 .digital-clock-container{
@@ -353,4 +372,18 @@ header{
 
 .stopwatch-reset-btn button:active{
   font-size: 1.5rem;
+}
+
+.search-bar{
+  /* display: block; */
+  margin-top: 4px;
+}
+
+/* .search-button{
+  
+} */
+
+.search-button svg{
+  height: 13px;
+  width: 24px;
 }
