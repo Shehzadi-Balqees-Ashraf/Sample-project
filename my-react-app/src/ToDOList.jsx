@@ -8,6 +8,7 @@ function ToDoList(){
     const [editingIndex,setEditingIndex] = useState(-1);
     const [editValue,setEditValue] = useState("");
     const [searchedValue,setSearchedValue] = useState("");
+    // const actualIndex = useRef();
 
     function handleInputChange(event){
         setNewItems(event.target.value);
@@ -21,20 +22,21 @@ function ToDoList(){
     }
 
     function handleRemoveItem(index){
-       
-        const updatedItemList = items.filter(( _ , i) => i!==index);
+        const actualIndex = items.findIndex((item)=> item === FilteredItems[index]);
+        const updatedItemList = items.filter(( _ , i) => i !== actualIndex);
     
         setItems(updatedItemList);
     }
 
     function handleEditItem(index){
-        setEditingIndex(index);
-        setEditValue(items[index]);
+        const actualIndex = items.findIndex((item) => item === FilteredItems[index]);
+        setEditingIndex(actualIndex);
+        setEditValue(items[actualIndex]);
     }
 
-    function handleSaveEdit(index){
+    function handleSaveEdit(){
         const updatedList = items.map((item,i) => 
-            i===index ? editValue : item
+            i===editingIndex ? editValue : item
         );
         setItems(updatedList);
         setEditingIndex(-1);
@@ -75,7 +77,7 @@ function ToDoList(){
                         {FilteredItems.map((task,index) =>
                             (
                                 <li key={index}>
-                                    {editingIndex===index ? (
+                                    {editingIndex=== items.findIndex((item)=> item ===FilteredItems[index]) ? (
                                         <div>
                                             <input type="text" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
                                             <button onClick={()=>handleSaveEdit(index)}>Save</button>
