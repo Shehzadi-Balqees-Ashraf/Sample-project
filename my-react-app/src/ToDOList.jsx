@@ -1,97 +1,126 @@
 import { useState } from "react";
 import DiceRoller from './DiceRoller.jsx'
+import { useSelector, useDispatch} from "react-redux";
+import { addItem , removeItem , editItem , setSearchedValue } from "./store.jsx";
 // import {delIcon} from './assets/icons8-delete.svg' 
 
 function ToDoList(){
-    const [items,setItems] = useState([]);
     const [newItems,setNewItems] = useState("");
     const [editingIndex,setEditingIndex] = useState(-1);
     const [editValue,setEditValue] = useState("");
-    const [searchedValue,setSearchedValue] = useState("");
+    const dispatch = useDispatch();
     // const actualIndex = useRef();
-
-    function handleInputChange(event){
-        setNewItems(event.target.value);
-    }
-
-    function handleAddItems(){
-        if(newItems.trim() !==""){
-            setItems(i =>[...i,newItems]);
-        setNewItems("");
-        }
-    }
-
-    function handleRemoveItem(index){
-        const actualIndex = items.findIndex((item)=> item === FilteredItems[index]);
-        const updatedItemList = items.filter(( _ , i) => i !== actualIndex);
+    const {items,searchedValue} = useSelector((state)=>state.todos);
     
-        setItems(updatedItemList);
-    }
 
-    function handleEditItem(index){
-        const actualIndex = items.findIndex((item) => item === FilteredItems[index]);
-        setEditingIndex(actualIndex);
-        setEditValue(items[actualIndex]);
-    }
+// //     function handleInputChange(event){
+// //         setNewItems(event.target.value);
+// //     }
 
-    function handleSaveEdit(){
-        const updatedList = items.map((item,i) => 
-            i===editingIndex ? editValue : item
-        );
-        setItems(updatedList);
+    const handleAddItems=()=>{
+        if(newItems.trim() !==""){
+           dispatch(addItem(newItems));
+        setNewItems("");
+        console.log("added");
+        }
+    };
+
+// //     function handleRemoveItem(index){
+// //         const actualIndex = items.findIndex((item)=> item === FilteredItems[index]);
+// //         const updatedItemList = items.filter(( _ , i) => i !== actualIndex);
+    
+// //         setItems(updatedItemList);
+// //     }
+
+    const handleSaveEdit=()=>{
+        dispatch(editItem({ index:editingIndex, newValue: editValue}));
         setEditingIndex(-1);
         setEditValue("");
-    }
+    };
 
-    function handleCancelEdit(){
-        setEditingIndex(-1);
-        setEditValue("");
-    }
+// //     function handleCancelEdit(){
+// //         setEditingIndex(-1);
+// //         setEditValue("");
+// //     }
 
-    function handleSearchedValue(event){
-        setSearchedValue(event.target.value.toLowerCase());
-    }
 
     const FilteredItems = items.filter((item) =>
-            (item.toLowerCase().includes(searchedValue))
+            (item.toLowerCase().includes(searchedValue.toLowerCase()))
         ); 
 
-    // useEffect(()=>
-    //     document.title = 'Total Items are: ${items.length()'
+// //     // useEffect(()=>
+// //     //     document.title = 'Total Items are: ${items.length()'
     // )
 
     return(
         <>
             <div className="to-do-ands-dice-roller-container-main">
                 <div className="to-do-list-container">
-                    <h1>ToDo List</h1>
-                    <input type="text" onChange={handleInputChange} placeholder="Enter Item Name" value={newItems}/>
+                <div>
+      <h1>ToDo List</h1>
+      <input
+        type="text"
+        value={newItems}
+        onChange={(e) => setNewItems(e.target.value)}
+        placeholder="Add new item"
+      />
+      <button onClick={handleAddItems}>Add</button>
+      <input
+        type="text"
+        value={searchedValue}
+        onChange={(e) => dispatch(setSearchedValue(e.target.value))}
+        placeholder="Search"
+      />
+      <ul>
+        {FilteredItems.map((item, index) => (
+          <li key={index}>
+            {editingIndex === index ? (
+              <>
+                <input
+                  type="text"
+                  value={editValue}
+                  onChange={(e) => setEditValue(e.target.value)}
+                />
+                <button onClick={handleSaveEdit}>Save</button>
+                <button onClick={() => setEditingIndex(-1)}>Cancel</button>
+              </>
+            ) : (
+              <>
+                {item}
+                <button onClick={() => setEditingIndex(index)}>Edit</button>
+                <button onClick={() => dispatch(removeItem(index))}>
+                  Delete
+                </button>
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+                    {/* <h1>ToDo List</h1>
+                    <input type="text" onChange={(e)=>setNewItems(e.target.value)} placeholder="Enter Item Name" value={newItems}/>
                     <button onClick={handleAddItems}>Add</button><br />
-                    <input className="search-bar" type="text" placeholder="search" value={searchedValue} onChange={handleSearchedValue}/>
-                    {/* <button className="search-button" onClick={FilteredItems}>
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 24 24">
-                                <path d="M 9 2 C 5.1458514 2 2 5.1458514 2 9 C 2 12.854149 5.1458514 16 9 16 C 10.747998 16 12.345009 15.348024 13.574219 14.28125 L 14 14.707031 L 14 16 L 20 22 L 22 20 L 16 14 L 14.707031 14 L 14.28125 13.574219 C 15.348024 12.345009 16 10.747998 16 9 C 16 5.1458514 12.854149 2 9 2 z M 9 4 C 11.773268 4 14 6.2267316 14 9 C 14 11.773268 11.773268 14 9 14 C 6.2267316 14 4 11.773268 4 9 C 4 6.2267316 6.2267316 4 9 4 z"></path>
-                        </svg>
-                    </button> */}
+                    <input className="search-bar" type="text" placeholder="search" value={searchedValue} onChange={(e)=>dispatch(setSearchedValue(e.target.value))}/>
+                  
                     <ul className="toDoList-main-ulTag">
                         {FilteredItems.map((task,index) =>
                             (
                                 <li key={index}>
-                                    {editingIndex=== items.findIndex((item)=> item ===FilteredItems[index]) ? (
+                                     {editingIndex=== index ? (
                                         <div>
                                             <input type="text" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
                                             <button onClick={()=>handleSaveEdit(index)}>Save</button>
-                                            <button onClick={()=>handleCancelEdit(index)}>Cancel</button>
+                                            <button onClick={()=>setEditingIndex(-1)}>Cancel</button>
                                         </div>
                                     ) : (
                                         <div>
                                                 <span>{task}</span>
-                                                <button className="del-button" onClick={()=> handleRemoveItem(index)}>
+                                                <button className="del-button" onClick={()=> dispatch(removeItem(index))}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
                                                         <path d="M 20.5 4 A 1.50015 1.50015 0 0 0 19.066406 6 L 14.640625 6 C 12.796625 6 11.086453 6.9162188 10.064453 8.4492188 L 7.6972656 12 L 7.5 12 A 1.50015 1.50015 0 1 0 7.5 15 L 40.5 15 A 1.50015 1.50015 0 1 0 40.5 12 L 40.302734 12 L 37.935547 8.4492188 C 36.913547 6.9162187 35.202375 6 33.359375 6 L 28.933594 6 A 1.50015 1.50015 0 0 0 27.5 4 L 20.5 4 z M 8.9726562 18 L 11.125 38.085938 C 11.425 40.887937 13.77575 43 16.59375 43 L 31.40625 43 C 34.22325 43 36.574 40.887938 36.875 38.085938 L 39.027344 18 L 8.9726562 18 z"></path>
                                                     </svg>
                                                 </button>
-                                                <button className="edit-button" onClick={()=>handleEditItem(index)}>
+                                                <button className="edit-button" onClick={()=>setEditingIndex(index)}>
                                                     <svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     x="0px"
@@ -107,7 +136,7 @@ function ToDoList(){
                                 </li>
                                 ))
                             }
-                        </ul>
+                        </ul> */}
                 </div>
                 <div className="dice-roller-container">
                     <DiceRoller />
@@ -118,3 +147,79 @@ function ToDoList(){
 }
 
 export default ToDoList
+
+
+// import { useState } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { addItem, removeItem, editItem, setSearchValue } from './store';
+
+// function ToDoList() {
+//   const [newItem, setNewItem] = useState('');
+//   const [editingIndex, setEditingIndex] = useState(-1);
+//   const [editValue, setEditValue] = useState('');
+//   const dispatch = useDispatch();
+//   const { items, searchValue } = useSelector((state) => state.todos);
+
+//   const handleAddItem = () => {
+//     if (newItem.trim() !== '') {
+//       dispatch(addItem(newItem));
+//       setNewItem('');
+//     }
+//   };
+
+//   const handleEditSave = () => {
+//     dispatch(editItem({ index: editingIndex, newValue: editValue }));
+//     setEditingIndex(-1);
+//     setEditValue('');
+//   };
+
+//   const filteredItems = items.filter((item) =>
+//     item.toLowerCase().includes(searchValue.toLowerCase())
+//   );
+
+//   return (
+//     <div>
+//       <h1>ToDo List</h1>
+//       <input
+//         type="text"
+//         value={newItem}
+//         onChange={(e) => setNewItem(e.target.value)}
+//         placeholder="Add new item"
+//       />
+//       <button onClick={handleAddItem}>Add</button>
+//       <input
+//         type="text"
+//         value={searchValue}
+//         onChange={(e) => dispatch(setSearchValue(e.target.value))}
+//         placeholder="Search"
+//       />
+//       <ul>
+//         {filteredItems.map((item, index) => (
+//           <li key={index}>
+//             {editingIndex === index ? (
+//               <>
+//                 <input
+//                   type="text"
+//                   value={editValue}
+//                   onChange={(e) => setEditValue(e.target.value)}
+//                 />
+//                 <button onClick={handleEditSave}>Save</button>
+//                 <button onClick={() => setEditingIndex(-1)}>Cancel</button>
+//               </>
+//             ) : (
+//               <>
+//                 {item}
+//                 <button onClick={() => setEditingIndex(index)}>Edit</button>
+//                 <button onClick={() => dispatch(removeItem(index))}>
+//                   Delete
+//                 </button>
+//               </>
+//             )}
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
+
+// export default ToDoList;
